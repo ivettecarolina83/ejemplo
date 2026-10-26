@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi primera página creada con inteligencia artificial</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --badge-bg: #eef2ff;
+      --badge-text: #4f46e5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: background-color 0.5s ease;
+    }
+
+    .container {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    p.welcome {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      background-color: var(--accent);
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 0.85rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 260px;
+      transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .color-status {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .color-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: var(--bg-color);
+      border: 2px solid rgba(15, 23, 42, 0.2);
+      display: inline-block;
+      transition: background-color 0.5s ease;
+    }
+
+    .code-Tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.25rem;
+        border-radius: 1.25rem;
+      }
+      .btn {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="badge" aria-hidden="true">✨ Demo Educativa de IA</div>
+    <h1>Mi primera página creada con inteligencia artificial</h1>
+    <p class="welcome">
+      ¡Hola y bienvenido/a! Esta demostración interactiva muestra cómo la inteligencia artificial puede ayudarte a construir páginas web combinando estructura (HTML), diseño adaptable (CSS) e interactividad (JavaScript) en pocos segundos.
+    </p>
+    <button id="changeColorBtn" class="btn" type="button">Cambiar color</button>
+    <div class="color-status" aria-live="polite">
+      <span id="colorDot" class="color-dot"></span>
+      <span>Color actual: <span id="colorName" class="code-Tag"> Gris Pizarra (#F8FAFC)</span></span>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const palette = [
+        { name: "Gris Pizarra", hex: "#F8FAFC" },
+        { name: "Azul Cielo", hex: "#E0F2FE" },
+        { name: "Verde Menta", hex: "#DCFCE7" },
+        { name: "Ámbar Suave", hex: "#FEF3C7" },
+        { name: "Rosa Pastel", hex: "#FCE7F3" },
+        { name: "Lavanda Digital", hex: "#EDE9FE" },
+        { name: "Coral Claro", hex: "#FFEDD5" },
+        { name: "Turquesa Brisa", hex: "#CCFBF1" }
+      ];
+
+      let currentIndex = 0;
+      const btn = document.getElementById("changeColorBtn");
+      const colorName = document.getElementById("colorName");
+      const colorDot = document.getElementById("colorDot");
+
+      btn.addEventListener("click", function () {
+        currentIndex = (currentIndex + 1) % palette.length;
+        const selected = palette[currentIndex];
+        document.body.style.backgroundColor = selected.hex;
+        colorDot.style.backgroundColor = selected.hex;
+        colorName.textContent = " " + selected.name + " (" + selected.hex + ")";
+      });
+    })();
+  </script>
+</body>
+</html>
